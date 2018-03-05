@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config-description:config-descriptions
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:config-description="http://eclipse.org/smarthome/schemas/config-description/v1.0.0"
+	xsi:schemaLocation="http://eclipse.org/smarthome/schemas/config-description/v1.0.0
+
+        http://eclipse.org/smarthome/schemas/config-description-1.0.0.xsd">
+
+
+	<config-description uri="channel-type:homeconnect:switch">
+        <parameter name="client_id" type="text">
+            <label>API Key</label>
+            <description>ID obtained from developer.homeconnect.com</description>
+            <required>false</required>
+        </parameter>
+        <parameter name="client_secret" type="text">
+            <label>Homeconnect App Secret</label>
+            <description>Secret for App obtained from developer.homeconnect.com</description>
+            <required>false</required>
+        </parameter>
+        <parameter name="refresh_token" type="text">
+            <label>App Refresh Token</label>
+            <description>Valid refresh token generated from authentication with client_id and client_secret</description>
+            <required>false</required>
+        </parameter>
+        <parameter name="auth_service" type="text">
+            <label>Auth Service</label>
+            <description>Set this to 'delegated' if you want to use a hosted service to manage homeconnect tokens at https://openhab-authservice.herokuapp.com rather than getting your own homeconnect api application id</description>
+            <options>
+                <option value="delegated">Delegated</option>
+            </options>
+            <required>false</required>
+        </parameter>
+        <parameter name="auth_service_token" type="text">
+            <label>Auth Service Token</label>
+            <description>Token provided by the auth service that identifies you to the auth service</description>
+            <required>false</required>
+        </parameter>
+    </config-description>
+
+
+</config-description:config-descriptions>

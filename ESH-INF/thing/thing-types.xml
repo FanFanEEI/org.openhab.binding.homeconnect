@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="homeconnect"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
+        xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
+    
+    <!-- Oven -->    
+    <thing-type id="oven">
+        <label>Oven</label>
+        <description>This is a oven!</description>
+        <channels>
+            <channel id="status_oven_remotecontrolactivation" typeId="remotecontrolactivation" />
+            <channel id="status_oven_remotestartallowance" typeId="remotestartallowance" />
+            <channel id="status_oven_operationstate" typeId="operationstate" />
+            <channel id="status_oven_doorstate" typeId="doorstate" />
+            <channel id="status_oven_currcavtempstate" typeId="currcavtempstate" />
+            <channel id="setting_oven_powerstate" typeId="powerstate" />
+        </channels>
+        <config-description>
+            <parameter name="haId" type="text" required="true">
+            <label>HAID</label>
+            <description>HAID of the homeconnect device</description>
+            <context>HAID</context>
+            </parameter>
+        </config-description>
+    </thing-type>
+    
+    <!-- Dishwasher -->
+    <thing-type id="dishwasher">
+        <label>Dishwasher</label>
+        <description>This is a dishwasher!</description>
+        <channels>
+            <channel id="switchstate_dishwasher" typeId="switch_dishwasher" />
+        </channels>
+        <config-description>
+            <parameter name="haId" type="text" required="true">
+            <label>HAID</label>
+            <description>HAID of the homeconnect device</description>
+            <context>HAID</context>
+            </parameter>
+        </config-description>
+    </thing-type>
+    
+    <!-- Fridge Freezer -->
+    <thing-type id="fridgefreezer">
+        <label>Fridge Freezer</label>
+        <description>This is a Fridge Freezer!</description>
+        <channels>
+            <channel id="switchstate_fridgefreezer" typeId="switch_fridgefreezer" />
+        </channels>
+        <config-description>
+            <parameter name="haId" type="text" required="true">
+            <label>HAID</label>
+            <description>HAID of the homeconnect device</description>
+            <context>HAID</context>
+            </parameter>
+        </config-description>
+    </thing-type>
+    
+    <!-- Dishwasher -->
+    <thing-type id="washer">
+        <label>Washer</label>
+        <description>This is a washer!</description>
+        <channels>
+            <channel id="switchstate_washer" typeId="switch_washer" />
+        </channels>
+        <config-description>
+            <parameter name="haId" type="text" required="true">
+            <label>HAID</label>
+            <description>HAID of the homeconnect device</description>
+            <context>HAID</context>
+            </parameter>
+        </config-description>
+    </thing-type>
+    
+    <!-- Dryer -->
+    <thing-type id="dryer">
+        <label>Dryer</label>
+        <description>This is a dryer!</description>
+        <channels>
+            <channel id="switchstate_dryer" typeId="switch_dryer" />
+        </channels>
+        <config-description>
+            <parameter name="haId" type="text" required="true">
+            <label>HAID</label>
+            <description>HAID of the homeconnect device</description>
+            <context>HAID</context>
+            </parameter>
+        </config-description>
+    </thing-type>
+    
+    <!-- Coffemaker -->
+    <thing-type id="coffeemaker">
+        <label>Coffee Machine</label>
+        <description>This is a coffemaker!</description>
+        <channels>
+            <channel id="switchstate_coffeemaker" typeId="switch_coffeemaker" />
+        </channels>
+        <config-description>
+            <parameter name="haId" type="text" required="true">
+            <label>HAID</label>
+            <description>HAID of the homeconnect device</description>
+            <context>HAID</context>
+            </parameter>
+        </config-description>
+    </thing-type>
+    
+    <!-- Cooktop -->
+    <thing-type id="cooktop">
+        <label>Cooktop</label>
+        <description>This is a cooktop! Coming soon!</description>
+        <channels>
+            <channel id="switchstate_cooktop" typeId="switch_cooktop" />
+        </channels>
+        <config-description>
+            <parameter name="haId" type="text" required="true">
+            <label>HAID</label>
+            <description>HAID of the homeconnect device</description>
+            <context>HAID</context>
+            </parameter>
+        </config-description>
+    </thing-type>
+    
+    <!-- Hood -->
+    <thing-type id="hood">
+        <label>Hood</label>
+        <description>This is a hood! Coming soon!</description>
+        <channels>
+            <channel id="switchstate_hood" typeId="switch_hood" />
+        </channels>
+        <config-description>
+            <parameter name="haId" type="text" required="true">
+            <label>HAID</label>
+            <description>HAID of the homeconnect device</description>
+            <context>HAID</context>
+            </parameter>
+        </config-description>
+    </thing-type>
+    
+    <!-- homeconnect Commands -->
+    <channel-type id="switch_oven">
+        <item-type>Switch</item-type>
+        <label>Switch State</label>
+        <description>The switch channel allows to switch the light on and off.
+        </description>
+        <category>Lightbulb</category>
+    </channel-type>
+    
+    <channel-type id="switch_dishwasher">
+        <item-type>Switch</item-type>
+        <label>Switch State</label>
+        <description>The switch channel allows to switch the light on and off.
+        </description>
+        <category>Lightbulb</category>
+    </channel-type>
+    
+    <channel-type id="switch_fridgefreezer">
+        <item-type>Switch</item-type>
+        <label>Switch State</label>
+        <description>The switch channel allows to switch the light on and off.
+        </description>
+        <category>Lightbulb</category>
+    </channel-type>
+    
+    <channel-type id="switch_washer">
+        <item-type>Switch</item-type>
+        <label>Switch State</label>
+        <description>The switch channel allows to switch the light on and off.
+        </description>
+        <category>Lightbulb</category>
+    </channel-type>
+    
+    <channel-type id="switch_dryer">
+        <item-type>Switch</item-type>
+        <label>Switch State</label>
+        <description>The switch channel allows to switch the light on and off.
+        </description>
+        <category>Lightbulb</category>
+    </channel-type>
+    
+    <channel-type id="switch_coffeemaker">
+        <item-type>Switch</item-type>
+        <label>Switch State</label>
+        <description>The switch channel allows to switch the light on and off.
+        </description>
+        <category>Lightbulb</category>
+    </channel-type>
+    
+    <channel-type id="switch_cooktop">
+        <item-type>Switch</item-type>
+        <label>Switch State</label>
+        <description>The switch channel allows to switch the light on and off.
+        </description>
+        <category>Lightbulb</category>
+    </channel-type>
+    
+    <channel-type id="switch_hood">
+        <item-type>Switch</item-type>
+        <label>Switch State</label>
+        <description>The switch channel allows to switch the light on and off.
+        </description>
+        <category>Lightbulb</category>
+    </channel-type>
+    
+    <channel-type id="remotecontrolactivation">
+        <item-type>Switch</item-type>
+        <label>Remotecontroll enabled?</label>
+        <description>This status indicates whether the allowance for remote controlling is enabled.
+        </description>
+        <state readOnly="true" />
+    </channel-type>
+    
+    <channel-type id="remotestartallowance">
+        <item-type>Switch</item-type>
+        <label>Remotestart allowed?</label>
+        <description>This status indicates whether the remote program start is enabled. This can happen due to a programmatic change (only disabling), or manually by the user changing the flag locally on the home appliance, or automatically after a certain duration - usually 24 hours.
+        </description>
+        <state readOnly="true" />
+    </channel-type>
+    
+    <channel-type id="status_localcontrol">
+        <item-type>Switch</item-type>
+        <label>Actual manually controlled?</label>
+        <description>This status indicates whether the home appliance is currently manually controlled by the user operating the home appliance, e.g. opening the door or pressing a button. After a few seconds without user intervention this flag is reverted and an appropriate event is sent.
+        </description>
+        <state readOnly="true" />
+    </channel-type>
+    
+    <channel-type id="operationstate">
+        <item-type>String</item-type>
+        <label>Operation State</label>
+        <description>This status describes the operation state of the home appliance.
+        </description>
+        <state readOnly="true" />
+    </channel-type>
+    
+    <channel-type id="doorstate">
+        <item-type>Contact</item-type>
+        <label>Door State</label>
+        <description>This status describes the state of the door of the home appliance. A change of that status is either triggered by the user operating the home appliance locally (i.e. opening/closing door) or automatically by the home appliance (i.e. locking the door).
+        </description>
+        <state readOnly="true" />
+    </channel-type>
+    
+    <channel-type id="currcavtempstate">
+        <item-type>String</item-type>
+        <label>Current cavity temperature</label>
+        <description>This status describes the current temperature in the cavity.
+        </description>
+        <state readOnly="true" />
+    </channel-type>
+    
+    <channel-type id="powerstate">
+        <item-type>Switch</item-type>
+        <label>Power State</label>
+        <description>This switch describes the power state.
+        </description>
+        <state readOnly="true" />
+    </channel-type>
+</thing:thing-descriptions>
