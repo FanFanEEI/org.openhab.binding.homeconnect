@@ -15,8 +15,9 @@ import java.util.Map;
  * Provides an interface to the Home Connect API.
  *
  * @author scrosby
- *         adapted to Home Connect: Stefan Foydl
- *
+ *         adapted to Home Connect:
+ * @author Stefan Foydl (Institute for Factory Automation and Production Systems Friedrich-Alexander-University
+ *         Erlangen-Nürnberg)
  */
 public interface IHomeconnectClient {
     /**
@@ -47,18 +48,23 @@ public interface IHomeconnectClient {
     /**
      * Updates the state of a specified device.
      *
-     * @param device Current device object
-     * @param updatedState A Map of states as strings to be updated and their new values
-     * @return IHomeconnectDevice the updated result of the change.
+     * @param device = Supported Home Connect Device
+     * @param statuskey = which status is chosen
      */
     public IHomeconnectDevice updateDeviceState(IHomeconnectDevice device, Map<String, String> updatedState);
 
     /**
      * Retrieves the setting of a specific device identified by the device HAID (E-number at the physical device)
      *
-     * @param type = Supported Home Connect Device
-     * @param Id = HAID of the device to retrieve
-     * @return IHomeconnectDevice object representing the device specified
+     * @param device = Supported Home Connect Device
      */
     public IHomeconnectDevice getDeviceSetting(IHomeconnectDevice device, String settingkey);
+
+    /**
+     * Retrieves the currently activated program of a specific device identified by the device HAID (E-number at the
+     * physical device)
+     *
+     * @param device = Supported Home Connect Device
+     */
+    public Map<String, Object> getProgramActive(IHomeconnectDevice device);
 }

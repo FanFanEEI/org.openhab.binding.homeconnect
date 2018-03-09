@@ -54,7 +54,9 @@ import com.google.gson.JsonParser;
  * ---end---
  *
  * @author Shawn Crosby (sacrosby@gmail.com)
- *         adapted to homeconnect: Stefan Foydl
+ *         adapted to homeconnect:
+ * @author Stefan Foydl (Institute for Factory Automation and Production Systems Friedrich-Alexander-University
+ *         Erlangen-Nürnberg)
  *
  */
 public class CloudOauthHomeconnectAuthenticationService implements IHomeconnectAuthenticationService {

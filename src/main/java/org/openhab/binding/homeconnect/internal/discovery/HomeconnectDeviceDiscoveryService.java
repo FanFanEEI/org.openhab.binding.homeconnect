@@ -33,7 +33,8 @@ import org.slf4j.LoggerFactory;
  *
  * @author Sebastian Marchand
  *         adopted to Home Connect:
- * @author Stefan Foydl
+ * @author Stefan Foydl (Institute for Factory Automation and Production Systems Friedrich-Alexander-University
+ *         Erlangen-Nürnberg)
  */
 public class HomeconnectDeviceDiscoveryService extends AbstractDiscoveryService {
     private final Logger logger = LoggerFactory.getLogger(HomeconnectDeviceDiscoveryService.class);

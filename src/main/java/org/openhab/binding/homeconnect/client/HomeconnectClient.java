@@ -12,7 +12,9 @@ package org.openhab.binding.homeconnect.client;
  * This is a singleton instance of a Home Connect client for communicating with the Home Connect rest api.
  *
  * @author Shawn Crosby
- *         adapted to Home Connect: Stefan Foydl
+ *         adapted to Home Connect:
+ * @author Stefan Foydl (Institute for Factory Automation and Production Systems Friedrich-Alexander-University
+ *         Erlangen-Nürnberg)
  *
  */
 public class HomeconnectClient {

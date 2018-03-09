@@ -14,7 +14,9 @@ import java.util.Map;
  * This object represents a device connected to the Home Connect account. Currently abstracts away the json bits
  *
  * @author scrosby
- *         adapted to homeconnect: Stefan Foydl
+ *         adapted to homeconnect:
+ * @author Stefan Foydl (Institute for Factory Automation and Production Systems Friedrich-Alexander-University
+ *         Erlangen-Nürnberg)
  *
  */
 public interface IHomeconnectDevice {
@@ -51,7 +53,7 @@ public interface IHomeconnectDevice {
      *
      * @return A Map of state parameters which have been requested to be applied to a device
      */
-    public Map<String, String> getDesiredState();
+    public Map<String, Object> getDesiredState();
 
     /**
      * Generic top level property access
@@ -66,12 +68,12 @@ public interface IHomeconnectDevice {
      *
      * @return A Map of state parameters and values for the device
      */
-    public Map<String, String> getCurrentState();
+    public Map<String, Object> getCurrentState();
 
     /**
      * The state of the device
      *
      * @return A Map of key and value of the state
      */
-    public Map<String, String> getMap();
+    public Map<String, Object> getMap();
 }

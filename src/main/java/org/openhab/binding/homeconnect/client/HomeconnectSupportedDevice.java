@@ -12,7 +12,9 @@ package org.openhab.binding.homeconnect.client;
  * HomeconnectThingHandler uses this enum to describe devices that it handles.
  *
  * @author Shawn Crosby
- *         adapted to Home Connect: Stefan Foydl
+ *         adapted to Home Connect:
+ * @author Stefan Foydl (Institute for Factory Automation and Production Systems Friedrich-Alexander-University
+ *         Erlangen-Nürnberg)
  */
 
 public enum HomeconnectSupportedDevice {

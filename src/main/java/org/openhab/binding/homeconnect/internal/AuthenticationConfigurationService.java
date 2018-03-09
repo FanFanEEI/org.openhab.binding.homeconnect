@@ -27,7 +27,8 @@ import org.slf4j.LoggerFactory;
  *
  * @author Shawn Crosby
  *         adopted to Home Connect:
- * @author Stefan Foydl
+ * @author Stefan Foydl (Institute for Factory Automation and Production Systems Friedrich-Alexander-University
+ *         Erlangen-Nürnberg)
  *
  */
 public class AuthenticationConfigurationService implements ManagedService {

@@ -34,7 +34,9 @@ import com.google.gson.JsonParser;
  * This implementation communicates with the homeconnect rest api.
  *
  * @author Shawn Crosby
- *         adapted to homeconnect: Stefan Foydl
+ *         adapted to homeconnect:
+ * @author Stefan Foydl (Institute for Factory Automation and Production Systems Friedrich-Alexander-University
+ *         Erlangen-Nürnberg)
  *
  *
  */
@@ -139,6 +141,59 @@ public class CloudRestfulHomeconnectClient implements IHomeconnectClient {
         return ret;
     }
 
+    @Override
+    public Map<String, Object> getProgramActive(IHomeconnectDevice device) {
+        /*
+         * Idea: first check which device it is --> device.getDeviceType()
+         * Then call all the settings for this device --> see Home Connect docs
+         */
+        String Id = device.getId();
+        log.debug("Getting Device activated program: {}", Id);
+        Client homeconnectClient = ClientBuilder.newClient();
+        WebTarget target = homeconnectClient.target(HOMECONNECT_URI)
+                .path("api/homeappliances/" + Id + "/programs/active");
+        // Test mit Json Object-------------------------------------
+        Map<String, Object> ret = null;
+        JsonObject response = (JsonObject) executeGet(target);
+        // Problem: getMap funktioniert nicht, wenn kein Error auftritt, da der normale Zustand mit lauter Key-Value
+        // Paaren voll ist
+        // Es ist dann also ein Array in der Map, was nicht geht!
+        if (new JsonHomeconnectDevice(response).getMap().get("key").equals("SDK.Error.NoProgramActive")) {
+            // klappt so nicht, da
+            ret = new JsonHomeconnectDevice(response).getMap();
+        } else {
+            // Object key = new JsonHomeconnectDevice(response).getMap().get("key");
+            // log.debug("resultJson = {}", key);
+            ret = new JsonHomeconnectDevice(response).getMap();
+            /*
+             * Iterator<JsonElement> iterator = resultJson.getAsJsonArray().iterator();
+             *
+             * while (iterator.hasNext()) {
+             * JsonElement element = iterator.next();
+             * if (!element.isJsonObject()) {
+             * continue;
+             * }
+             * ret.add(new JsonHomeconnectDevice(element.getAsJsonObject()));
+             *
+             * }
+             */
+        }
+
+        homeconnectClient.close();
+
+        return ret;
+
+        // Ende Test-----------------------------------------------
+        /*
+         * JsonElement resultJson = executeGet(target);
+         * log.debug("getStatus: resultJson {}", resultJson);
+         * IHomeconnectDevice ret = new JsonHomeconnectDevice(resultJson.getAsJsonObject());
+         * homeconnectClient.close();
+         *
+         * return ret;
+         */
+    }
+
     private JsonElement executePut(WebTarget target, String payload) {
         String token = HomeconnectAuthenticationService.getInstance().getAuthToken();
 
@@ -199,7 +254,7 @@ public class CloudRestfulHomeconnectClient implements IHomeconnectClient {
         } else {
             JsonElement err = resultJson.get("error");
             log.debug("Error: {}", err);
-            ret = null;
+            ret = err;
         }
 
         return ret;

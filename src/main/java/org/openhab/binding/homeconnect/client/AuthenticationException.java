@@ -11,7 +11,8 @@ package org.openhab.binding.homeconnect.client;
 /**
  * Exception that is thrown when unable to authenticate to Home Connect API
  *
- * @author Stefan Foydl
+ * @author Stefan Foydl (Institute for Factory Automation and Production Systems Friedrich-Alexander-University
+ *         Erlangen-Nürnberg)
  *
  */
 public class AuthenticationException extends RuntimeException {

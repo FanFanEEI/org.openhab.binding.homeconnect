@@ -12,7 +12,9 @@ package org.openhab.binding.homeconnect.client;
  * This is a singleton instance of the authentication service to get tokens from the Home Connect rest api
  *
  * @author Shawn Crosby
- *         adapted to homeconnect: Stefan Foydl
+ *         adapted to homeconnect:
+ * @author Stefan Foydl (Institute for Factory Automation and Production Systems Friedrich-Alexander-University
+ *         Erlangen-Nürnberg)
  *
  */
 public class HomeconnectAuthenticationService {

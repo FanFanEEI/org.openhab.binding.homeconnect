@@ -10,6 +10,7 @@ package org.openhab.binding.homeconnect.handler;
 
 import static org.openhab.binding.homeconnect.homeconnectBindingConstants.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +34,7 @@ import org.slf4j.LoggerFactory;
  * sent to one of the channels.
  *
  * @author Stefan Foydl - Initial contribution
+ *         (Institute for Factory Automation and Production Systems Friedrich-Alexander-University Erlangen-Nürnberg)
  */
 public class OvenHandler extends HomeconnectBaseThingHandler {
     public OvenHandler(Thing thing) {
@@ -56,6 +58,7 @@ public class OvenHandler extends HomeconnectBaseThingHandler {
         }
     }
 
+    // TODO: adapt to Home Connect
     public void setDesiredState(IHomeconnectDevice device, Map<String, String> updatedState) {
         logger.debug("Setting device state: {}", updatedState);
         try {
@@ -65,6 +68,7 @@ public class OvenHandler extends HomeconnectBaseThingHandler {
         }
     }
 
+    // TODO: adapt to Home Connect
     private void setSwitchState(boolean state) {
         IHomeconnectDevice device = getDevice();
         if (state) {
@@ -87,9 +91,10 @@ public class OvenHandler extends HomeconnectBaseThingHandler {
         return HomeconnectSupportedDevice.OVEN;
     }
 
+    // TODO: adapt to Home Connect
     @Override
     protected void updateDeviceState(IHomeconnectDevice device) {
-        boolean switchedState = Boolean.valueOf(device.getCurrentState().get("powered"));
+        boolean switchedState = Boolean.valueOf((boolean) device.getCurrentState().get("powered"));
         updateState(CHANNEL_STATUS_OVEN_DOORSTATE, (switchedState ? OnOffType.ON : OnOffType.OFF));
     }
 
@@ -112,8 +117,8 @@ public class OvenHandler extends HomeconnectBaseThingHandler {
         // Remote control active --> BSH.Common.Status.RemoteControlActive
         String statuskey = "BSH.Common.Status.RemoteControlActive";
         IHomeconnectDevice rcactive_status = client.getDeviceState(device, statuskey);
-        Map<String, String> rcactive_map = rcactive_status.getMap();
-        String rcactivestate = rcactive_map.get("value");
+        Map<String, Object> rcactive_map = rcactive_status.getMap();
+        String rcactivestate = rcactive_map.get("value").toString();
         if (rcactivestate.equals("true")) {
             updateState(CHANNEL_STATUS_OVEN_REMOTECONTROLACTIVATION, OnOffType.ON);
         } else if (rcactivestate.equals("false")) {
@@ -126,8 +131,8 @@ public class OvenHandler extends HomeconnectBaseThingHandler {
         // Remote control allowed --> BSH.Common.Status.RemoteControlStartAllowed
         statuskey = "BSH.Common.Status.RemoteControlStartAllowed";
         IHomeconnectDevice rcsallowed_status = client.getDeviceState(device, statuskey);
-        Map<String, String> rcsallowed_map = rcsallowed_status.getMap();
-        String rcsallowedstate = rcsallowed_map.get("value");
+        Map<String, Object> rcsallowed_map = rcsallowed_status.getMap();
+        String rcsallowedstate = rcsallowed_map.get("value").toString();
         if (rcsallowedstate.equals("true")) {
             updateState(CHANNEL_STATUS_OVEN_REMOTESTARTALLOWANCE, OnOffType.ON);
         } else if (rcsallowedstate.equals("false")) {
@@ -157,8 +162,8 @@ public class OvenHandler extends HomeconnectBaseThingHandler {
         // operation state --> BSH.Common.Status.OperationState
         statuskey = "BSH.Common.Status.OperationState";
         IHomeconnectDevice operation_status = client.getDeviceState(device, statuskey);
-        Map<String, String> operation_map = operation_status.getMap();
-        String operationstate = operation_map.get("value");
+        Map<String, Object> operation_map = operation_status.getMap();
+        String operationstate = operation_map.get("value").toString();
         String operationString = "";
         if (operationstate.equals("BSH.Common.EnumType.OperationState.Inactive")) {
             operationString = "Inactive";
@@ -189,8 +194,8 @@ public class OvenHandler extends HomeconnectBaseThingHandler {
         // door state --> BSH.Common.Status.DoorState
         statuskey = "BSH.Common.Status.DoorState";
         IHomeconnectDevice door_status = client.getDeviceState(device, statuskey);
-        Map<String, String> status_map = door_status.getMap();
-        String doorstate = status_map.get("value");
+        Map<String, Object> status_map = door_status.getMap();
+        String doorstate = status_map.get("value").toString();
         if (doorstate.equals("BSH.Common.EnumType.DoorState.Open")) {
             updateState(CHANNEL_STATUS_OVEN_DOORSTATE, OpenClosedType.OPEN);
         } else if (doorstate.equals("BSH.Common.EnumType.DoorState.Closed")) {
@@ -205,9 +210,9 @@ public class OvenHandler extends HomeconnectBaseThingHandler {
         // current cavity temp --> Cooking.Oven.Status.CurrentCavityTemperature
         statuskey = "Cooking.Oven.Status.CurrentCavityTemperature";
         IHomeconnectDevice currentCavTemp_status = client.getDeviceState(device, statuskey);
-        Map<String, String> currCavTemp_map = currentCavTemp_status.getMap();
-        String currCavTempvalue = currCavTemp_map.get("value");
-        String currCavTempunit = currCavTemp_map.get("unit");
+        Map<String, Object> currCavTemp_map = currentCavTemp_status.getMap();
+        String currCavTempvalue = currCavTemp_map.get("value").toString();
+        String currCavTempunit = currCavTemp_map.get("unit").toString();
         String currCavTempString = currCavTempvalue + " " + currCavTempunit;
         updateState(CHANNEL_STATUS_OVEN_CURRCAVTEMPSTATE, new StringType(currCavTempString));
         // logger.debug("Stopp");
@@ -219,17 +224,11 @@ public class OvenHandler extends HomeconnectBaseThingHandler {
          * Needed Keys for OVEN:
          * BSH.Common.Setting.PowerState
          */
-        /*
-         * try {
-         * Thread.sleep(2000);
-         * } catch (InterruptedException e) {
-         * }
-         */
         // Power State --> BSH.Common.Setting.PowerState
         String settingkey = "BSH.Common.Setting.PowerState";
         IHomeconnectDevice powerstate_setting = client.getDeviceSetting(device, settingkey);
-        Map<String, String> powerstate_map = powerstate_setting.getMap();
-        String powerstate = powerstate_map.get("value");
+        Map<String, Object> powerstate_map = powerstate_setting.getMap();
+        String powerstate = powerstate_map.get("value").toString();
         if (powerstate.equals("BSH.Common.EnumType.PowerState.Off")) {
             updateState(CHANNEL_SETTING_OVEN_POWERSTATE, OnOffType.OFF);
         } else if (powerstate.equals("BSH.Common.EnumType.PowerState.On")) {
@@ -239,7 +238,92 @@ public class OvenHandler extends HomeconnectBaseThingHandler {
         } else {
             logger.debug("Unknown setting PowerState Oven:{}", powerstate);
         }
+        // logger.debug("Stopp");
+    }
+
+    @Override
+    protected void getProgramActive(IHomeconnectDevice device) {
+        /*
+         *
+         */
+        Map<String, Object> programactive_map = client.getProgramActive(device);
+        // TODO: Hier keine Map möglich, weil Array zurück kommt.
+        String activatedprogram = programactive_map.get("key").toString();
+        String activeprogramString = "";
+        boolean stop = false;
+        String optionString = "";
+        if (activatedprogram.equals("SDK.Error.NoProgramActive")) {
+            activeprogramString = "None";
+            optionString = "None";
+            updateState(CHANNEL_PROGRAM_OVEN_SETPOINTTEMP, new StringType(optionString));
+            updateState(CHANNEL_PROGRAM_OVEN_DURATION, new StringType(optionString));
+            updateState(CHANNEL_PROGRAM_OVEN_REMAININGTIME, new StringType(optionString));
+            updateState(CHANNEL_PROGRAM_OVEN_ELAPSEDTIME, new StringType(optionString));
+            updateState(CHANNEL_PROGRAM_OVEN_PROGRAMPROGRESS, new StringType(optionString));
+            updateState(CHANNEL_PROGRAM_OVEN_FASTPREHEAT, OnOffType.OFF);
+            stop = true;
+        } else if (activatedprogram.equals("Cooking.Oven.Program.HeatingMode.PizzaSetting")) {
+            activeprogramString = "Pizza";
+        } else if (activatedprogram.equals("Cooking.Oven.Program.HeatingMode.HotAir")) {
+            activeprogramString = "Circulation Air/Preheat";
+        } else if (activatedprogram.equals("Cooking.Oven.Program.HeatingMode.TopBottomHeating")) {
+            activeprogramString = "Top Bottom Heating";
+        } else {
+            logger.debug("Unknown activatedprogram Oven:{}", activatedprogram);
+            activeprogramString = "unknown";
+        }
+        updateState(CHANNEL_PROGRAM_OVEN_ACTIVE, new StringType(activeprogramString));
+        if (!stop) {
+            ArrayList<Map<String, Object>> programoptions_array = new ArrayList<Map<String, Object>>();
+            programoptions_array = (ArrayList<Map<String, Object>>) programactive_map.get("options");
+            logger.debug("programoptions_map: {}", programoptions_array);
+
+            for (int i = 0; i < programoptions_array.size(); i++) {
+                Map<String, Object> options_entry = programoptions_array.get(i);
+                logger.debug("Stopp");
+
+                String key = options_entry.get("key").toString();
+
+                String value = options_entry.get("value").toString(); // Datentyp beachten je nach testkey
+                if (options_entry.get("unit") != null) {
+                    String unit = options_entry.get("unit").toString();
+                    // TODO: Ausgabe String zusammenbauen
+                    optionString = value + " " + unit;
+                } else {
+                    optionString = value;
+                }
+
+                if (key.equals("Cooking.Oven.Option.SetpointTemperature")) {
+                    updateState(CHANNEL_PROGRAM_OVEN_SETPOINTTEMP, new StringType(optionString));
+                } else if (key.equals("BSH.Common.Option.Duration")) {
+                    updateState(CHANNEL_PROGRAM_OVEN_DURATION, new StringType(optionString));
+                } else if (key.equals("BSH.Common.Option.RemainingProgramTime")) {
+                    updateState(CHANNEL_PROGRAM_OVEN_REMAININGTIME, new StringType(optionString));
+                } else if (key.equals("BSH.Common.Option.ElapsedProgramTime")) {
+                    updateState(CHANNEL_PROGRAM_OVEN_ELAPSEDTIME, new StringType(optionString));
+                } else if (key.equals("BSH.Common.Option.ProgramProgress")) {
+                    updateState(CHANNEL_PROGRAM_OVEN_PROGRAMPROGRESS, new StringType(optionString));
+                } else if (key.equals("Cooking.Oven.Option.FastPreHeat")) {
+                    if (value.equals("true")) {
+                        updateState(CHANNEL_PROGRAM_OVEN_FASTPREHEAT, OnOffType.ON);
+                    } else {
+                        updateState(CHANNEL_PROGRAM_OVEN_FASTPREHEAT, OnOffType.OFF);
+                    }
+
+                } else {
+                    logger.debug("Stopp");
+                }
+                logger.debug("Stopp");
+            }
+
+        }
         logger.debug("Stopp");
+        // TODO: Get options
+        /*
+         * CHANNEL_PROGRAM_OVEN_SETPOINTTEMP
+         * CHANNEL_PROGRAM_OVEN_DURATION
+         * CHANNEL_PROGRAM_OVEN_REMAININGTIME
+         */
     }
 
 }

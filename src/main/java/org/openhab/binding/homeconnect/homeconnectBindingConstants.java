@@ -14,6 +14,7 @@ import org.eclipse.smarthome.core.thing.ThingTypeUID;
  * The {@link HomeconnectBinding} class defines common constants, which are used across the whole binding.
  *
  * @author Stefan Foydl - Initial contribution
+ *         (Institute for Factory Automation and Production Systems Friedrich-Alexander-University Erlangen-Nürnberg)
  */
 public class homeconnectBindingConstants {
 
@@ -36,6 +37,13 @@ public class homeconnectBindingConstants {
     public static final String CHANNEL_STATUS_OVEN_DOORSTATE = "status_oven_doorstate";
     public static final String CHANNEL_STATUS_OVEN_CURRCAVTEMPSTATE = "status_oven_currcavtempstate";
     public static final String CHANNEL_SETTING_OVEN_POWERSTATE = "setting_oven_powerstate";
+    public static final String CHANNEL_PROGRAM_OVEN_ACTIVE = "program_oven_active";
+    public static final String CHANNEL_PROGRAM_OVEN_SETPOINTTEMP = "program_oven_setpointtemp";
+    public static final String CHANNEL_PROGRAM_OVEN_DURATION = "program_oven_duration";
+    public static final String CHANNEL_PROGRAM_OVEN_REMAININGTIME = "program_oven_remainingtime";
+    public static final String CHANNEL_PROGRAM_OVEN_ELAPSEDTIME = "program_oven_elapsedtime";
+    public static final String CHANNEL_PROGRAM_OVEN_PROGRAMPROGRESS = "program_oven_programprogress";
+    public static final String CHANNEL_PROGRAM_OVEN_FASTPREHEAT = "program_oven_fastpreheat";
 
     // List of all Channel ids for an dishwasher
     public static final String CHANNEL_SWITCHSTATE_DISHWASHER = "switchstate_dishwasher";

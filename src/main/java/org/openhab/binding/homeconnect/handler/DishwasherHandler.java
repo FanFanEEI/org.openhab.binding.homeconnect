@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
  * sent to one of the channels.
  *
  * @author Stefan Foydl - Initial contribution
+ *         (Institute for Factory Automation and Production Systems Friedrich-Alexander-University Erlangen-Nürnberg)
  */
 public class DishwasherHandler extends HomeconnectBaseThingHandler {
     public DishwasherHandler(Thing thing) {

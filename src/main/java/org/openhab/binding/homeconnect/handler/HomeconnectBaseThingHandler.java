@@ -20,12 +20,9 @@ import org.eclipse.smarthome.core.thing.ThingStatusDetail;
 import org.eclipse.smarthome.core.thing.binding.BaseThingHandler;
 import org.eclipse.smarthome.core.types.Command;
 import org.openhab.binding.homeconnect.client.AuthenticationException;
-//import org.openhab.binding.homeconnect.client.AuthenticationException;
 import org.openhab.binding.homeconnect.client.HomeconnectClient;
 import org.openhab.binding.homeconnect.client.HomeconnectSupportedDevice;
-//import org.openhab.binding.homeconnect.client.HomeconnectSupportedDevice;
 import org.openhab.binding.homeconnect.client.IHomeconnectClient;
-//import org.openhab.binding.homeconnect.client.IHomeconnectDevice;
 import org.openhab.binding.homeconnect.client.IHomeconnectDevice;
 import org.openhab.binding.homeconnect.internal.discovery.HomeconnectDeviceDiscoveryService;
 import org.slf4j.Logger;
@@ -35,7 +32,8 @@ import org.slf4j.LoggerFactory;
  * This is the base class for devices connected to your Home Connect account. Implements initialization for all
  * Home Connect devices.
  *
- * @author Stefan Foydl
+ * @author Stefan Foydl (Institute for Factory Automation and Production Systems Friedrich-Alexander-University
+ *         Erlangen-Nürnberg)
  *
  */
 public abstract class HomeconnectBaseThingHandler extends BaseThingHandler {
@@ -78,6 +76,7 @@ public abstract class HomeconnectBaseThingHandler extends BaseThingHandler {
                     updateStatus(ThingStatus.ONLINE);
                     getDeviceState(getDevice());
                     getDeviceSetting(getDevice());
+                    getProgramActive(getDevice());
                 } else if (conn.equals("false")) {
                     updateStatus(ThingStatus.OFFLINE);
                 }
@@ -147,6 +146,7 @@ public abstract class HomeconnectBaseThingHandler extends BaseThingHandler {
         if (conn.equals("true") && position == size) {
             getDeviceState(getDevice());
             getDeviceSetting(getDevice());
+            getProgramActive(getDevice());
         } else if (conn.equals("false") && position == size) {
             updateStatus(ThingStatus.OFFLINE);
         }
@@ -190,6 +190,8 @@ public abstract class HomeconnectBaseThingHandler extends BaseThingHandler {
 
     /**
      * Handles state change events from the api
+     *
+     * * @param device The device to retrieve
      */
     protected abstract void getDeviceState(IHomeconnectDevice device);
 
@@ -197,6 +199,13 @@ public abstract class HomeconnectBaseThingHandler extends BaseThingHandler {
      * Reads settings from the api
      */
     protected void getDeviceSetting(IHomeconnectDevice device) {
+
+    }
+
+    /**
+     * Reads activated program of the device from the api
+     */
+    protected void getProgramActive(IHomeconnectDevice device) {
 
     }
 

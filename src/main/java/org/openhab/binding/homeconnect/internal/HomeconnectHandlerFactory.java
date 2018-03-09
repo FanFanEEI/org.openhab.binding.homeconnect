@@ -28,6 +28,7 @@ import com.google.common.collect.ImmutableSet;
  * handlers.
  *
  * @author Stefan Foydl - Initial contribution
+ *         (Institute for Factory Automation and Production Systems Friedrich-Alexander-University Erlangen-Nürnberg)
  */
 public class HomeconnectHandlerFactory extends BaseThingHandlerFactory {
 

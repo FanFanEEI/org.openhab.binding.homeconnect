@@ -19,7 +19,9 @@ import com.google.gson.reflect.TypeToken;
  * This class parses json from the Home Connect API IHomeconnectDevice
  *
  * @author Shawn Crosby (for WINK)
- *         adapted to Home Connect: Stefan Foydl
+ *         adapted to Home Connect:
+ * @author Stefan Foydl (Institute for Factory Automation and Production Systems Friedrich-Alexander-University
+ *         Erlangen-Nürnberg)
  *
  */
 public class JsonHomeconnectDevice implements IHomeconnectDevice {
@@ -40,7 +42,7 @@ public class JsonHomeconnectDevice implements IHomeconnectDevice {
     }
 
     @Override
-    public Map<String, String> getMap() {
+    public Map<String, Object> getMap() {
         return toMap(this.json);
     }
 
@@ -77,15 +79,15 @@ public class JsonHomeconnectDevice implements IHomeconnectDevice {
     }
 
     @Override
-    public Map<String, String> getDesiredState() {
+    public Map<String, Object> getDesiredState() {
         // original line of the wink binding:
         // JsonObject data = json.get("desired_state").getAsJsonObject();
         JsonObject data = null;
         return toMap(data);
     }
 
-    private Map<String, String> toMap(JsonObject json) {
-        return new Gson().fromJson(json, new TypeToken<HashMap<String, String>>() {
+    private Map<String, Object> toMap(JsonObject json) {
+        return new Gson().fromJson(json, new TypeToken<HashMap<String, Object>>() {
         }.getType());
     }
 
@@ -101,7 +103,7 @@ public class JsonHomeconnectDevice implements IHomeconnectDevice {
 
     // TODO: An homeconnect anpassen --> evtl. in noch zu erschaffendes IHomeconnctDeviceState Objekt verschieben.
     @Override
-    public Map<String, String> getCurrentState() {
+    public Map<String, Object> getCurrentState() {
         JsonObject data = json.get("desired_state").getAsJsonObject();
         return toMap(data);
     }

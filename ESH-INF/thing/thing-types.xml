@@ -15,6 +15,13 @@
             <channel id="status_oven_doorstate" typeId="doorstate" />
             <channel id="status_oven_currcavtempstate" typeId="currcavtempstate" />
             <channel id="setting_oven_powerstate" typeId="powerstate" />
+            <channel id="program_oven_active" typeId="programactive" />
+            <channel id="program_oven_setpointtemp" typeId="setpointtemp" />
+            <channel id="program_oven_duration" typeId="duration" />
+            <channel id="program_oven_remainingtime" typeId="remainingtime" />
+            <channel id="program_oven_elapsedtime" typeId="elapsedtime" />
+            <channel id="program_oven_programprogress" typeId="programprogress" />
+            <channel id="program_oven_fastpreheat" typeId="fastpreheat" />
         </channels>
         <config-description>
             <parameter name="haId" type="text" required="true">
@@ -254,6 +261,62 @@
         <item-type>Switch</item-type>
         <label>Power State</label>
         <description>This switch describes the power state.
+        </description>
+        <state readOnly="true" />
+    </channel-type>
+    
+    <channel-type id="programactive">
+        <item-type>String</item-type>
+        <label>Currently activated program</label>
+        <description>This status describes the currently activated program.
+        </description>
+        <state readOnly="true" />
+    </channel-type>
+    
+    <channel-type id="setpointtemp">
+        <item-type>String</item-type>
+        <label>setpoint temperature</label>
+        <description>This status describes the setpoint temperature in the cavity.
+        </description>
+        <state readOnly="true" />
+    </channel-type>
+    
+    <channel-type id="duration">
+        <item-type>String</item-type>
+        <label>duration of the program</label>
+        <description>This status describes the duration of the activated program.
+        </description>
+        <state readOnly="true" />
+    </channel-type>
+    
+    <channel-type id="remainingtime">
+        <item-type>String</item-type>
+        <label>Remaining time of the program</label>
+        <description>This status describes the remaining time of the activated program.
+        </description>
+        <state readOnly="true" />
+    </channel-type>
+    
+    <channel-type id="elapsedtime">
+        <item-type>String</item-type>
+        <label>Elapsed time of the program</label>
+        <description>This status describes the elapsed time of the activated program.
+        </description>
+        <state readOnly="true" />
+    </channel-type>
+    
+    <channel-type id="programprogress">
+        <item-type>String</item-type>
+        <label>Progress of the program</label>
+        <description>This status describes the progress of the activated program.
+        </description>
+        <state readOnly="true" />
+    </channel-type>
+    
+    <channel-type id="fastpreheat">
+        <item-type>Switch</item-type>
+        <label>Fast preheat</label>
+        <description>Is the option fast preheat enabled?
         </description>
         <state readOnly="true" />
     </channel-type>

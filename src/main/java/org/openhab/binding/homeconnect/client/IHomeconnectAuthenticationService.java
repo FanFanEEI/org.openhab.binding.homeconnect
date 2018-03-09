@@ -17,7 +17,9 @@ package org.openhab.binding.homeconnect.client;
  * The service provides a method for retrieving and refreshing an access token.
  *
  * @author scrosby
- *         adapted to homeconnect: Stefan Foydl
+ *         adapted to homeconnect:
+ * @author Stefan Foydl (Institute for Factory Automation and Production Systems Friedrich-Alexander-University
+ *         Erlangen-Nürnberg)
  *
  */
 public interface IHomeconnectAuthenticationService {
