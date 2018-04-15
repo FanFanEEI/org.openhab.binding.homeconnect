@@ -41,15 +41,15 @@ The file must contain four parameters:
  
 ```
 client_id = {homeconnect_api_key}
-redirect_uri = {redirect_uri}
-code = redirect_authorization_code
-refresh_token = refresh_token
+client_secret={homeconnect_client_secret}
+scope=IdentifyAppliance%20Monitor%20Settings
+redirect_uri=https://apiclient.home-connect.com/o2c.html
 ```
-{homeconnect_api_key} has to be replaced with your API Key and {redirect_uri} with the Redirect URL from your Home Connect developer account.
+{homeconnect_api_key} has to be replaced with your API Key and {homeconnect_client_secret} with the Client Secret from your Home Connect developer account. The scope has to be adopted to your requirements. See [1] for all possible scopes.
+{redirect_uri} has to be filled with the Redirect URL from your Home Connect developer account. The address above suits for the API Simulator!
 You can obtain these values at https://developer.home-connect.com/?q=user/my_apps
-For the simulator the Redirect URL is: https://apiclient.home-connect.com/o2c.html
-The last both code and refresh_token are wildcards for the values obtained automatically during the authorization flow.
 
+[1] List of scopes: https://developer.home-connect.com/?q=docs/api/authorization/scope
 
 ## Thing Configuration
 
@@ -64,16 +64,22 @@ Depending on the device being configured, there are different channels available
 |:-----:|:-----------------------------------:|:---------------------------------------:|:----------:|:----------:|
 | OVEN  | status_oven_remotecontrolactivation |       Is remote control activated?      |   hidden   |    true    |
 | OVEN  |  status_oven_remotecontrolallowance |        Is remote control allowed?       |   hidden   |    true    |
-| OVEN  |       status_oven_localcontrol      | Is device controlled local by the user? |   hidden   |    true    |
-| OVEN  |      status_oven_operationstate     |  Describes the actual operation state.  |   visable  |    true    |
-| OVEN  |        status_oven_doorstate        | Describes the actual state of the door. |   visable  |    true    |
-
+| OVEN  |      status_oven_operationstate     |         actual operation state          |   visable  |    true    |
+| OVEN  |        status_oven_doorstate        |        actual state of the door         |   visable  |    true    |
+| OVEN  |     status_oven_currcavtempstate    |     current temperature in the cavity   |   visable  |    true    |
+| OVEN  |       setting_oven_powerstate       |             power state                 |   visable  |    true    |
+| OVEN  |         program_oven_active         |      currently activated program        |   visable  |    true    |
+| OVEN  |      program_oven_setpointtemp      |     setpoint temperature in the cavity  |   visable  |    true    |
+| OVEN  |      program_oven_duration          |     duration of the activated program   |   visable  |    true    |
+| OVEN  |      program_oven_remainingtime     | remaining time of the activated program |   visable  |    true    |
+| OVEN  |      program_oven_elapsedtime       |  elapsed time of the activated program  |   visable  |    true    |
+| OVEN  |    program_oven_programprogress     |     progress of the activated program   |   visable  |    true    |
+| OVEN  |      program_oven_fastpreheat       |   Is the option fast preheat enabled?   |   visable  |    true    |
 
 Your items file will look like:
 
 ```
-Item Switch MyLightSwitch "My Light Switch"  {channel="wink:light_bulb:MyLight:lightstate"}
-Item Dimmer MyLightDimmer "My Light Dimmer"  {channel="wink:light_bulb:MyLight:lightlevel"}
+Switch GF_Oven_RCenabled "Remotecontrol"   (GF_Oven)    {channel="homeconnect:oven:BOSCH-HCS01OVN1-XXXXXXXXXX:status_oven_remotecontrolactivation"}
 ```
 
 ## For Developers
@@ -85,7 +91,6 @@ In this file all the global constants are stored:
 // REST URI constants
     public static final String HOMECONNECT_URI = "https://simulator.home-connect.com/";
     public static final String HOMECONNECT_DEVICES_REQUEST_PATH = "api/homeappliances";
-    public static final String REDIRECT_URI = "https://apiclient.home-connect.com/o2c.html";
     public static final String HOMECONNECT_ACCESS_TOKEN = "access_token";
     public static final String HOMECONNECT_REFRESH_TOKEN = "refresh_token";
 ```

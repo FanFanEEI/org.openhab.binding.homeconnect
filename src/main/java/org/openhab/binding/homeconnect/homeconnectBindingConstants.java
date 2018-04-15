@@ -51,7 +51,6 @@ public class homeconnectBindingConstants {
     // REST URI constants
     public static final String HOMECONNECT_URI = "https://simulator.home-connect.com/";
     public static final String HOMECONNECT_DEVICES_REQUEST_PATH = "api/homeappliances";
-    public static final String REDIRECT_URI = "https://apiclient.home-connect.com/o2c.html";
     public static final String HOMECONNECT_ACCESS_TOKEN = "access_token";
     public static final String HOMECONNECT_REFRESH_TOKEN = "refresh_token";
 }

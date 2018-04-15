@@ -10,7 +10,7 @@
  */
 package org.openhab.binding.homeconnect.client;
 
-import static org.openhab.binding.homeconnect.homeconnectBindingConstants.*;
+import static org.openhab.binding.homeconnect.homeconnectBindingConstants.HOMECONNECT_URI;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -60,25 +60,21 @@ import com.google.gson.JsonParser;
  *
  */
 public class CloudOauthHomeconnectAuthenticationService implements IHomeconnectAuthenticationService {
-    private static final String ACCESS_TOKEN = "access_token";
 
     private final Logger logger = LoggerFactory.getLogger(CloudOauthHomeconnectAuthenticationService.class);
 
     private String token;
     private String client_id;
-    private String client_secret;
     private String scope;
-    private String grant_type;
     private String code;
     private String refresh_token;
     private String state;
+    private String redirect_uri;
 
     public CloudOauthHomeconnectAuthenticationService(Map<String, String> properties) {
         client_id = properties.get("client_id");
-        client_secret = properties.get("client_secret");
-        // TODO: scope can be changed here!
-        scope = "IdentifyAppliance%20Monitor%20Settings";
-        refresh_token = properties.get("refresh_token");
+        scope = properties.get("scope");
+        redirect_uri = properties.get("redirect_uri");
 
         ClientConfig configuration = new ClientConfig();
         configuration = configuration.property(ClientProperties.CONNECT_TIMEOUT, 1000 * 15);
@@ -89,8 +85,11 @@ public class CloudOauthHomeconnectAuthenticationService implements IHomeconnectA
         // The authorization link has the following pattern:
         // https://simulator.home-connect.com/security/oauth/authorize?response_type=code&redirect_uri=YYYYYYYYYYYYY&client_id=XXXXXXXXXXXXXX&scope=IdentifyAppliance&state=homeconnect_auth
 
-        String path = HOMECONNECT_URI + "security/oauth/authorize?response_type=code&redirect_uri=" + REDIRECT_URI
+        String path = HOMECONNECT_URI + "security/oauth/authorize?response_type=code&redirect_uri=" + redirect_uri
                 + "&client_id=" + client_id + "&scope=" + scope + "&state=homeconnect_auth";
+
+        // String path = HOMECONNECT_URI + "security/oauth/authorize?response_type=code&redirect_uri=" + REDIRECT_URI
+        // + "&client_id=" + client_id + "&scope=" + scope + "&state=homeconnect_auth";
         /*
          * // open browser
          * // Funktioniert anscheinend nicht in jedem System!
@@ -151,7 +150,8 @@ public class CloudOauthHomeconnectAuthenticationService implements IHomeconnectA
         Form payload = new Form(); // "Matrix" fuer Sendedaten anlegen
         // Matrix beschreiben mit den zu sendenden Daten. (Vgl. homeconnect Dokumentation)
         payload.param("client_id", client_id);
-        payload.param("redirect_uri", REDIRECT_URI);
+        // payload.param("redirect_uri", REDIRECT_URI);
+        payload.param("redirect_uri", redirect_uri);
         payload.param("grant_type", "authorization_code");
         payload.param("code", code);
         // payload.param("state", "xxx");
@@ -190,7 +190,6 @@ public class CloudOauthHomeconnectAuthenticationService implements IHomeconnectA
 
         Form payload = new Form(); // "Matrix" fuer Sendedaten anlegen
         // Matrix beschreiben mit den zu sendenden Daten. (Vgl. homeconnect Dokumentation)
-        // TODO: refresh_token aus Antwort für access-Token nehmen!
         payload.param("grant_type", "refresh_token");
         payload.param("refresh_token", refresh_token);
 

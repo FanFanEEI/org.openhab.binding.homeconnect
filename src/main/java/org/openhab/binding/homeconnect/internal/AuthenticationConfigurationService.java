@@ -49,7 +49,8 @@ public class AuthenticationConfigurationService implements ManagedService {
             Map<String, String> props = new HashMap<String, String>();
             props.put("client_id", (String) properties.get("client_id"));
             props.put("client_secret", (String) properties.get("client_secret"));
-            props.put("refresh_token", (String) properties.get("refresh_token"));
+            props.put("scope", (String) properties.get("scope"));
+            props.put("redirect_uri", (String) properties.get("redirect_uri"));
             logger.debug("Configuring Homeconnect Authentication Service {}", props);
             service = new CloudOauthHomeconnectAuthenticationService(props);
         }
